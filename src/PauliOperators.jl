@@ -19,6 +19,7 @@ include("function_convert.jl")
 include("function_commute.jl")
 include("function_otimes.jl")
 include("function_osum.jl")
+include("helpers.jl")
 
 # Exports
 export Pauli
@@ -47,6 +48,6 @@ export clip!
 export ⊗
 export ⊕
 export expectation_value
-
+export get_on_bits
 end
 
