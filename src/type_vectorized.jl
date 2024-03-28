@@ -84,3 +84,12 @@ function Base.Matrix(so::SuperOperator{T,N}) where {T,N}
         end
     end  
 end
+
+"""
+    Base.size(pv::VectorizedPauliSum{N}) where N
+
+Returns the dimension of the vector 4^N where N is the number of qubits
+"""
+function Base.size(pv::VectorizedPauliSum{N}) where N
+    return (4^N,)
+end
