@@ -93,3 +93,9 @@ Returns the dimension of the vector 4^N where N is the number of qubits
 function Base.size(pv::VectorizedPauliSum{N}) where N
     return (4^N,)
 end
+
+Base.eltype(pv::VectorizedPauliSum{N}) where N = PauliSum{N}
+
+# Not certain how to construct this, so I overwrote the zerovector function in krylovkit_plugin.jl
+#Base.similar(pv::VectorizedPauliSum{N}, [T::Type<:Number]) = 
+
