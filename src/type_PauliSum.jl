@@ -212,3 +212,15 @@ function LinearAlgebra.tr(p::PauliSum{N}) where N
         return 0
     end
 end
+
+function LinearAlgebra.transpose!(ps::PauliSum{N}) where N
+    for (key,val) in ps.ops
+        ps[key] = conj(val)	
+    end
+end
+
+function LinearAlgebra.transpose(ps::PauliSum{N}) where N
+    out = deepcopy(ps)
+    transpose!(out)
+    return out
+end
