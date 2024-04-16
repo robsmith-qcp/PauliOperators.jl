@@ -49,7 +49,6 @@ export ⊗
 export ⊕
 export expectation_value
 export get_on_bits
-export generate_PauliSum
 export to_Pauli
 end
 
