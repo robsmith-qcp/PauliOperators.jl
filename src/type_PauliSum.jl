@@ -235,38 +235,19 @@ function LinearAlgebra.tr(p::PauliSum{N}) where N
 end
 
 """
-    generate_PauliSum(n::Integer)
-
-this function generates a PauliSum of 4^n terms
-"""
-function generate_PauliSum(n::Integer)
-    pauli_chars = ['I', 'X', 'Y', 'Z']
-
-    # Generate all permutations of length n
-    all_paulis = collect(Iterators.product(fill(pauli_chars, n)...))
-    all_paulis = [collect(p) for p in all_paulis]
-
-    # Sum all Paulis generated
-    full_ps = PauliSum(n)
-    for pauli in all_paulis
-        pauli_str = join(pauli)
-        full_ps += Pauli(pauli_str)
-    end
-
-    return full_ps
-end
-
-"""
     to_Pauli(m::Matrix)
 
 this function takes a square matrix and generates the Pauli representation of that matrix
 """
 function to_Pauli(m::Matrix)
     N = trunc(Int,log2(size(m)[1]))
-    full_ps = generate_PauliSum(N)
+    pauli_chars = ['I', 'X', 'Y', 'Z']
+    all_paulis = collect(Iterators.product(fill(pauli_chars, N)...))
+    all_paulis = [collect(p) for p in all_paulis]
     ps = PauliSum(N)
     scale = 1/(2^N)
     for (key,val) in full_ps.ops
+        key = Pauli(join(pauli))
         ps[key] = scale*tr(adjoint(key)*m)
     end
     clip!(ps)
