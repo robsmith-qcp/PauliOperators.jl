@@ -350,6 +350,17 @@ using Random
     @test string(KetBitString(4,13)) == "1011"
     @test string(KetBitString(4,14)) == "0111"
     @test string(KetBitString(4,15)) == "1111"
+
+    ca = rand()
+    cb = rand()
+    pa = random_Pauli(3)
+    pb = random_Pauli(3)
+    ps1 = ca*pa + cb*pb
+    println("Random PauliSum")
+    display(ps1)
+
+    pm = Matrix(ps1)
+    ps2 = to_Pauli(pm)
+
+    @test ps1 ≈ ps2
 end
-
-
