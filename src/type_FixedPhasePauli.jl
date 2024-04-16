@@ -265,3 +265,5 @@ end
 function LinearAlgebra.tr(p::FixedPhasePauli{N}) where N
     return p.x == 0 ? 2^N : 0
 end
+
+Base.adjoint(p::FixedPhasePauli) = is_hermitian(p) ? p : -1*p
